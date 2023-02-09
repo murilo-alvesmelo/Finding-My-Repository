@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import { StyleSheet, View, Text, Platform, TouchableOpacity, TextInput } from "react-native";
+import { StyleSheet, View, Text, Platform, TouchableOpacity, TextInput, FlatList} from "react-native";
 import  Icon  from "react-native-vector-icons/Feather";
 import Cards from "./Cards";
 import axios from "axios";
 
-export default function Header(){
-    const [name, setName] = useState('')
+
+export default function Home(){
+    const [name, setName] = useState('murilo-alvesmelo')
     const [repos, setRepos] = useState([])
 
     const searchGithub = (n) =>{
@@ -13,7 +14,7 @@ export default function Header(){
             setRepos(res.data)
         })
     }
-    
+
     function clear(){
         setName('')
         setRepos([])
@@ -46,13 +47,11 @@ export default function Header(){
                     </View>
                 </View>
             </View>
-            {
-                repos.map(i =>{
-                    return(
-                        <Cards name={repos[0].name}/>
-                    )
-                })
-            }
+            <FlatList
+                data={repos}
+                renderItem={({ item }) => <Cards name={item.name}/>}
+                keyExtractor={ item => item.id}
+            />
         </>
     )
 }
@@ -63,7 +62,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     containerFind: {
-        marginTop: Platform.OS == 'ios' ? 30 : 40,
+        marginTop: Platform.OS == 'ios' ? 40 : 40,
         height: 150,
         width: '90%',
         borderRadius: 20,

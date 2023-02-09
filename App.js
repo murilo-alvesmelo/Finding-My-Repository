@@ -1,12 +1,12 @@
 import { StatusBar } from 'expo-status-bar';
-import Header from './src/components/Header';
 import Cards from './src/components/Cards';
+import Home from './src/components/Home';
 
 export default function App() {
   return (
     <>
       <StatusBar hidden={true}/>
-      <Header/>
+      <Home/>
     </>
   );
 }

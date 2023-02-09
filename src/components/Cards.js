@@ -1,12 +1,11 @@
 import React from "react";
-import { StyleSheet, View, Text } from "react-native";
+import { StyleSheet, View, Text, FlatList } from "react-native";
 
-export default function Cards(props){
-    console.log(props)
+export default function Cards({name}){
     return(
         <View style={styles.container}>
             <View style={styles.containerFind}>
-                <Text>{props.name}</Text>
+                <Text>{name}</Text>
             </View>
         </View>
     )
