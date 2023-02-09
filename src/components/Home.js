@@ -5,7 +5,7 @@ import Cards from "./Cards";
 import axios from "axios";
 
 
-export default function Home(){
+export default function Home(props){
     const [name, setName] = useState('murilo-alvesmelo')
     const [repos, setRepos] = useState([])
 
@@ -27,7 +27,6 @@ export default function Home(){
                     <Text style={styles.headerText}>Finding My Repository</Text>
                     <View style={styles.inputIcon}>
                         <TextInput
-                            onFocus={false}
                             style={styles.input}
                             value={name}
                             onChangeText={setName}
@@ -49,7 +48,7 @@ export default function Home(){
             </View>
             <FlatList
                 data={repos}
-                renderItem={({ item }) => <Cards name={item.name}/>}
+                renderItem={({ item }) => <Cards {...item} {...props}/>}
                 keyExtractor={ item => item.id}
             />
         </>
@@ -65,6 +64,7 @@ const styles = StyleSheet.create({
         marginTop: Platform.OS == 'ios' ? 40 : 40,
         height: 150,
         width: '90%',
+        borderWidth: 2,
         borderRadius: 20,
         backgroundColor: '#9400d3',
         justifyContent: 'center',
