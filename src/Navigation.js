@@ -10,7 +10,7 @@ export default function Nagivation(){
         <NavigationContainer>
             <Stack.Navigator>
                 <Stack.Screen name="Home" component={Home} options={{headerShown: false}}/>
-                <Stack.Screen name="InfoRepos" component={InfoRepos}/>
+                <Stack.Screen name="InfoRepos" component={InfoRepos} options={{title: 'Informações'}}/>
             </Stack.Navigator>
         </NavigationContainer>
     )
