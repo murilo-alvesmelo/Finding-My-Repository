@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import { StyleSheet, View, Text, Platform, TouchableOpacity, TextInput, FlatList} from "react-native";
+import { StyleSheet, View, Text, Platform, TouchableOpacity, TextInput, FlatList, Image, Keyboard} from "react-native";
 import  Icon  from "react-native-vector-icons/Feather";
 import Cards from "./Cards";
 import axios from "axios";
+import * as Animatable from 'react-native-animatable';
 
 
 export default function Home(props){
@@ -10,9 +11,9 @@ export default function Home(props){
     const [repos, setRepos] = useState([])
 
     const searchGithub = (n) =>{
-        axios.get(`https://api.github.com/users/${n}/repos`).then((res) =>{
-            setRepos(res.data)
-        })
+        axios.get(`https://api.github.com/users/${n}/repos`)
+            .then((res) =>setRepos(res.data))
+            .catch((err) => setRepos(null))
     }
 
     function clear(){
@@ -23,7 +24,7 @@ export default function Home(props){
         <>    
             <View style={styles.container}>
                 <View style={styles.containerFind}>
-                    <Icon name="github" size={35}/>
+                    <Icon name="github" size={40}/>
                     <Text style={styles.headerText}>Finding My Repository</Text>
                     <View style={styles.inputIcon}>
                         <TextInput
@@ -33,7 +34,7 @@ export default function Home(props){
                             />
                         <TouchableOpacity
                             style={styles.icon}
-                            onPress={() => searchGithub(name)}
+                            onPress={() => (searchGithub(name), Keyboard.dismiss())}
                             >
                             <Icon name="search" size={30}/>
                         </TouchableOpacity>
@@ -45,12 +46,21 @@ export default function Home(props){
                         </TouchableOpacity>
                     </View>
                 </View>
-            </View>
-            <FlatList
-                data={repos}
-                renderItem={({ item }) => <Cards {...item} {...props}/>}
-                keyExtractor={ item => item.id}
-            />
+            </View>  
+            {
+                repos ?
+                <FlatList
+                    data={repos}
+                    renderItem={({ item }) => <Cards {...item} {...props}/>}
+                    keyExtractor={ item => item.id}
+                /> :
+                <Animatable.Image 
+                    animation="bounceInDown"
+                    duration={1500}
+                    style={styles.image}
+                    source={require('../../assets/pagenotfound.png')}
+                />
+            }
         </>
     )
 }
@@ -91,5 +101,11 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         marginHorizontal: 5, 
         marginTop: 5
+    },
+    image: {
+        width: '100%',
+        height: '50%',
+        justifyContent: 'center',
+        alignItems: 'center',
     }
 })

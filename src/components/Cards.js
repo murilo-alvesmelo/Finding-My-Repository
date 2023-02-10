@@ -8,7 +8,9 @@ export default function Cards(props){
                 <View style={styles.CardsInside}>
                 <Image style={styles.image} source={{uri: props.owner.avatar_url}}/>
                     <Text style={styles.CardsTitle}>{props.name}</Text>
-                    <Text style={styles.language}>{props.language ? props.language : '---'}</Text>
+                    <View style={styles.language}>
+                        <Text>{props.language ? props.language : '---'}</Text>
+                    </View>
                 <TouchableOpacity 
                     style={styles.button}
                     onPress={() => props.navigation.navigate('InfoRepos', {...props})}
@@ -29,7 +31,7 @@ const styles = StyleSheet.create({
     Cards: {
         marginTop: Platform.OS == 'ios' ? 30 : 40,
         marginBottom: 10,
-        height: Platform.OS == 'ios' ? 160: 180,
+        height: Platform.OS == 'ios' ? 180: 180,
         width: '90%',
         borderRadius: 20,
         borderWidth: 2,
@@ -51,13 +53,14 @@ const styles = StyleSheet.create({
         marginTop: 5,
     },
     language: {
+        backgroundColor: '#d3d3d3',
         borderWidth: 1,
         borderRadius: 10,
         marginTop: 5,
         width: 90,
         height: 20,
-        textAlign: 'center',
-        backgroundColor: '#d3d3d3'
+        justifyContent: 'center',
+        alignItems: 'center',
     },
     button: {
         backgroundColor: '#9400d3',

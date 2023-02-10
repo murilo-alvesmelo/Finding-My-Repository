@@ -18,9 +18,13 @@ export default function InfoRepos(props){
         <ScrollView>
             <View style={styles.container}>
                 <Text style={styles.title}>{props.route.params.name}</Text>
-                <View style={{flexDirection: "row"}}>
-                    <Text style={styles.commit}>Commits: {(props.route.params.commits_url).length}</Text>
-                    <Text style={styles.commit}>Forks: {(props.route.params.forks)}</Text>
+                <View style={{flexDirection: 'row',}}>
+                    <View style={styles.commit}>
+                        <Text>Commits: {(props.route.params.commits_url).length}</Text>
+                    </View>
+                    <View style={styles.commit}>
+                        <Text>Forks: {(props.route.params.forks)}</Text>
+                    </View>
                 </View>
                 <Text style={styles.subtitle}>Criado em: {moment(props.route.params.created_at).format('DD/MM/YYYY')}</Text>
                 <Text style={styles.subtitle}>Ultima atualização: {moment(props.route.params.created_at).fromNow()}</Text>
@@ -56,8 +60,9 @@ const styles = StyleSheet.create({
         margin: 5,
         width: 95,
         height: 20,
-        textAlign: 'center',
-        backgroundColor: '#9400d3'
+        backgroundColor: '#9400d3',
+        justifyContent: 'center',
+        alignItems: 'center',
     }
 
 })
@@ -68,7 +73,7 @@ const markdownStyle = {
         textAlign: 'center',
       },
       text: {
-        textAlign: "right",
+        textAlign: "left",
       },
       view: {
         alignSelf: 'stretch',
