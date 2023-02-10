@@ -2,6 +2,7 @@ import React from "react";
 import  { View, Text, StyleSheet } from 'react-native'
 
 export default function InfoRepos(props){
+    ///repos/{owner}/{repo}/contents/{path}
     return(
         <View style={styles.container}>
             <Text style={styles.title}>{props.route.params.name}</Text>
