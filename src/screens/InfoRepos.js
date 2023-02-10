@@ -1,7 +1,16 @@
-import React from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import  { View, Text, StyleSheet } from 'react-native'
 
 export default function InfoRepos(props){
+    const[readme, setReadme] = useState([])
+    useEffect(() => {
+        axios.get(`https://api.github.com/repos/${props.route.params.name}/algoritmos-ordenacao/contents`)
+            .then(res => setReadme(res.data))
+    })
+
+    
+    
     ///repos/{owner}/{repo}/contents/{path}
     return(
         <View style={styles.container}>

@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, View, Text, FlatList, Button, TouchableOpacity, Image } from "react-native";
+import { StyleSheet, View, Text, FlatList, Button, TouchableOpacity, Image, Platform } from "react-native";
 
 export default function Cards(props){
     return(
@@ -8,7 +8,7 @@ export default function Cards(props){
                 <View style={styles.CardsInside}>
                 <Image style={styles.image} source={{uri: props.owner.avatar_url}}/>
                     <Text style={styles.CardsTitle}>{props.name}</Text>
-                    <Text style={styles.language}>{props.language}</Text>
+                    <Text style={styles.language}>{props.language ? props.language : '---'}</Text>
                 <TouchableOpacity 
                     style={styles.button}
                     onPress={() => props.navigation.navigate('InfoRepos', {...props})}
@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
     Cards: {
         marginTop: Platform.OS == 'ios' ? 30 : 40,
         marginBottom: 10,
-        height: 160,
+        height: Platform.OS == 'ios' ? 160: 180,
         width: '90%',
         borderRadius: 20,
         borderWidth: 2,

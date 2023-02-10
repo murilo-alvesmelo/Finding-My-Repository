@@ -6,7 +6,7 @@ import axios from "axios";
 
 
 export default function Home(props){
-    const [name, setName] = useState('murilo-alvesmelo')
+    const [name, setName] = useState('')
     const [repos, setRepos] = useState([])
 
     const searchGithub = (n) =>{
