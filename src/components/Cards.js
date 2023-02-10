@@ -1,14 +1,20 @@
 import React from "react";
-import { StyleSheet, View, Text, FlatList, Button } from "react-native";
+import { StyleSheet, View, Text, FlatList, Button, TouchableOpacity, Image } from "react-native";
 
 export default function Cards(props){
-    console.log(Object.keys(props))
     return(
         <View style={styles.container}>
             <View style={styles.Cards}>
                 <View style={styles.CardsInside}>
+                <Image style={styles.image} source={{uri: props.owner.avatar_url}}/>
                     <Text style={styles.CardsTitle}>{props.name}</Text>
-                    <Button title="Visualizar" onPress={() => props.navigation.navigate('InfoRepos', {...props})}/>
+                    <Text style={styles.language}>{props.language}</Text>
+                <TouchableOpacity 
+                    style={styles.button}
+                    onPress={() => props.navigation.navigate('InfoRepos', {...props})}
+                >
+                    <Text>Visualizar</Text>
+                </TouchableOpacity>
                 </View>
             </View>
         </View>
@@ -23,18 +29,43 @@ const styles = StyleSheet.create({
     Cards: {
         marginTop: Platform.OS == 'ios' ? 30 : 40,
         marginBottom: 10,
-        height: 150,
+        height: 160,
         width: '90%',
         borderRadius: 20,
         borderWidth: 2,
         borderColor: '#9400d3',
+        justifyContent: 'center',
+
     },
     CardsInside: {
         alignItems: 'center',
     },
+    image: {
+        height: 40,
+        width: 40,
+        borderRadius: 20
+    },  
     CardsTitle: {
         fontSize: 18,
         fontWeight: "bold",
         marginTop: 5,
+    },
+    language: {
+        borderWidth: 1,
+        borderRadius: 10,
+        marginTop: 5,
+        width: 90,
+        height: 20,
+        textAlign: 'center',
+    },
+    button: {
+        backgroundColor: '#9400d3',
+        borderWidth: 1,
+        borderRadius: 10,
+        marginTop: 20,
+        height: 40,
+        width: 100,
+        justifyContent: 'center',
+        alignItems: 'center',
     }
 })

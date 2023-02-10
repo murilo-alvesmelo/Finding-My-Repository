@@ -84,7 +84,7 @@ const styles = StyleSheet.create({
         height: 30,
         width: 150,
         borderWidth: 1,
-        borderRadius: 20,
+        borderRadius: 10,
         
     },
     icon: {
