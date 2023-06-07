@@ -4,6 +4,11 @@ import React, { useEffect, useState } from "react";
 import  { View, Text, StyleSheet, ScrollView, Linking } from 'react-native'
 import Markdown from "react-native-markdown-package";
 
+
+function MensageError(){
+    return <Text style={styles.errorMsg}>Nenhum readme foi encontrado!</Text>
+}
+
 export default function InfoRepos(props){
 
     const[readme, setReadme] = useState()
@@ -29,11 +34,9 @@ export default function InfoRepos(props){
                 <Text style={styles.subtitle}>Criado em: {moment(props.route.params.created_at).format('DD/MM/YYYY')}</Text>
                 <Text style={styles.subtitle}>Ultima atualização: {moment(props.route.params.created_at).fromNow()}</Text>
                 <Text style={styles.subtitle}>{props.route.params.description ? props.route.params.description : "Sem descrição"}</Text>
-                <Markdown
-                    styles={markdownStyle.singleLineMd}
-                    >
-                    {readme ? readme : 'Readme não encontrado.'}
-                </Markdown>
+                {
+                    readme ? <Markdown styles={markdownStyle.singleLineMd}>{readme}</Markdown> : <MensageError/>
+                }
             </View>
         </ScrollView>
     )
@@ -63,6 +66,11 @@ const styles = StyleSheet.create({
         backgroundColor: '#9400d3',
         justifyContent: 'center',
         alignItems: 'center',
+    },
+    errorMsg: {
+        fontWeight: 'bold',
+        marginTop: 20,
+        fontSize: 20
     }
 
 })
