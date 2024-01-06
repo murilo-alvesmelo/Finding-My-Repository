@@ -1,9 +1,5 @@
 import React from "react";
-import Animated, {
-  BounceIn,
-  BounceInRight,
-  withDelay,
-} from "react-native-reanimated";
+import Animated, { BounceIn } from "react-native-reanimated";
 import { View, Text, TouchableOpacity, Image } from "react-native";
 import styles from "./style";
 
