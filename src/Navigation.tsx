@@ -3,6 +3,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { NavigationContainer } from "@react-navigation/native";
 import Home from "./screens/Home";
 import InfoRepos from "./screens/InfoRepositorio";
+
 const Stack = createNativeStackNavigator();
 
 export default function Nagivation() {
