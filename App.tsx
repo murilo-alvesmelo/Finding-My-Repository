@@ -1,6 +1,6 @@
 import { StatusBar } from "expo-status-bar";
 import { LogBox } from "react-native";
-import Nagivation from "./src/Navigation";
+import Nagivation from "./src/routes/Navigation";
 import "./src/utils/Fontawesome";
 
 LogBox.ignoreLogs([

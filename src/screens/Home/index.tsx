@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { FlatList } from "react-native";
+import React, { useEffect, useState } from "react";
+import { FlatList, RefreshControl } from "react-native";
 import axios from "axios";
 import * as Animatable from "react-native-animatable";
 import Header from "../../components/Header";
@@ -10,6 +10,7 @@ import imagem from "../../../assets/pagenotfound.png";
 export default function Home(props) {
   const [name, setName] = useState("murilo-alvesmelo");
   const [repos, setRepos] = useState([]);
+  const [refreshing, setRefreshing] = useState(false);
 
   /**
    * @description Função para buscar os repositórios do usuário informado
@@ -20,6 +21,18 @@ export default function Home(props) {
       .get(`https://api.github.com/users/${username}/repos`)
       .then((res) => setRepos(res.data))
       .catch(() => setRepos(null));
+  };
+
+  /**
+   * @description Função para atualizar a lista de repositórios
+   */
+  const onRefresh = () => {
+    setRefreshing(true);
+    setRepos([]);
+    setTimeout(() => {
+      searchGithub(name);
+      setRefreshing(false);
+    }, 2000);
   };
 
   /**
@@ -45,6 +58,13 @@ export default function Home(props) {
             <Cards index={index} {...item} {...props} />
           )}
           keyExtractor={(item) => item.id}
+          refreshControl={
+            <RefreshControl
+              refreshing={refreshing}
+              onRefresh={onRefresh}
+              tintColor={"#9400d3"}
+            />
+          }
         />
       ) : (
         <Animatable.Image
