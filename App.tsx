@@ -1,6 +1,7 @@
 import { StatusBar } from "expo-status-bar";
-import Nagivation from "./src/Navigation";
 import { LogBox } from "react-native";
+import Nagivation from "./src/routes/Navigation";
+import "./src/utils/Fontawesome";
 
 LogBox.ignoreLogs([
   "Non-serializable values were found in the navigation state",
